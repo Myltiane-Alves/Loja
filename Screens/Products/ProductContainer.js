@@ -6,13 +6,14 @@ import ProductList from './ProductList';
 import SearchedProduct from './SearchedProducts';
 import Banner from '../../Shared/Banner';
 import CategoryFilter from './CategoryFilter';
+import { useLinkProps } from '@react-navigation/native';
 
 const data = require('../../assets/data/products.json');
 const productsCategories = require('../../assets/data/categories.json');
 
 var { height } = Dimensions.get('window');
 
-const ProductContainer = () => {
+const ProductContainer = (props) => {
 
     const [products, setProducts] = useState([]);
     const [productsFiltered, setProductsFiltered] = useState([]);
@@ -85,6 +86,7 @@ const ProductContainer = () => {
             </Header>
             {focus == true ? (
                 <SearchedProduct
+                    navigation={props.navigation}
                     productsFiltered={productsFiltered}
                 />
             ) : (
@@ -108,6 +110,7 @@ const ProductContainer = () => {
                                 {productsCtg.map((item) => {
                                     return (
                                         <ProductList
+                                            navigation={props.navigation}
                                             key={item._id.$oid}
                                             item={item}
                                         />
