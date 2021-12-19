@@ -5,6 +5,7 @@ import { Container, Header, Icon, Item, Input, Text} from 'native-base';
 import ProductList from './ProductList';
 import SearchedProduct from './SearchedProducts';
 import Banner from '../../Shared/Banner';
+import CategoryFilter from './CategoryFilter';
 
 const data = require('../../assets/data/products.json');
 const categories = require('../../assets/data/categories.json');
@@ -17,6 +18,7 @@ const ProductContainer = () => {
     const [productsFiltered, setProductsFiltered] = useState([]);
     const [focus, setFocus] = useState();
     const [categories, setCategories] = useState([]);
+    const [productsCtg, setProductsCtg] = useState([]);
     const [active, setActive] = useState();
     const [initialState, setInitialState] = useState([]);
 
@@ -24,6 +26,9 @@ const ProductContainer = () => {
         setProducts(data);
         setProductsFiltered(data);
         setFocus(false);
+        setCategories(categories);
+        setActive(-1);
+        setInitialState(data);
 
         return () => {
             setProducts([]);
@@ -50,6 +55,20 @@ const ProductContainer = () => {
         setFocus(false);
     };
 
+    // Categories
+    const changeCtg = (ctg) => {
+        {
+        ctg === "all"
+            ? [setProductsCtg(initialState), setActive(true)]
+            : [
+            setProductsCtg(
+                products.filter((i) => i.category._id === ctg),
+                setActive(true)
+            ),
+            ];
+        }
+    };
+
     return(
         <Container>
             <Header searchBar rounded>
@@ -68,9 +87,18 @@ const ProductContainer = () => {
                     productsFiltered={productsFiltered}
                 />
             ) : (
-                <View style={styles.container}>
+                <View >
                     <View>
                         <Banner />
+                    </View>
+                    <View>
+                        <CategoryFilter 
+                            categories={categories}
+                            categoryFilter={changeCtg}
+                            productsCtg={productsCtg}
+                            active={active}
+                            setActive={setActive}
+                        />
                     </View>
                     <View style={styles.listContainer}>
                         <FlatList 
