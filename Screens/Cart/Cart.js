@@ -20,10 +20,15 @@ import { Thumbnail } from 'native-base';
 var { height, width } = Dimensions.get("window");
 
 const Cart = (props) => {
+    var total = 0;
+    props.cartItems.forEach(cart => {
+        return (total += cart.product.price)
+    });
+    
     return (
         <>
             {props.cartItems.length ? (
-              <Container>
+                <Container>
                   <H1 style={{ alignSelf: 'center'}}>Carrinho</H1>
                   {props.cartItems.map(data => {
                       return (
@@ -50,9 +55,23 @@ const Cart = (props) => {
                                </Right>
                            </Body>
                         </ListItem>
-                      )
+                      );
                   })}
-              </Container>  
+                  <View style={styles.bottomContainer}>
+                    <Left>
+                        <Text style={styles.price}>R$ {total}</Text>
+                    </Left>
+                    <Right>
+                        <Button title="Remover" />
+                    </Right>
+                    <Right>
+                        <Button
+                         title="Checkout"
+                         onPress={() => props.navigation.navigate('Checkout')} 
+                        />
+                    </Right>
+                  </View>  
+                </Container>  
             ) : (
                 <Container style={styles.emptyContainer}>
                     <Text>Parece que seu carrinho está vazio</Text>
