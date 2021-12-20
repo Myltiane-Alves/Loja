@@ -61,28 +61,29 @@ const ProductContainer = (props) => {
     const changeCtg = (ctg) => {
         {
             ctg === "all"
-                ? [setProductsCtg(initialState), setActive(true)]
-                : [
-                    setProductsCtg(
-                        products.filter((i) => i.category._id === ctg),
-                        setActive(true)
-                    ),
-                ];
+            ? [setProductsCtg(initialState), setActive(true)]
+            : [
+                setProductsCtg(
+                    products.filter((i) => i.category._id === ctg),
+                ),
+            ];
         }
     };
 
     return (
         <Container>
             <Header searchBar rounded>
-                <Icon name="ios-search" />
-                <Input
-                    placeholder='Pesquisar'
-                    onFocus={openList}
-                    onChangeText={(text) => searchProduct(text)}
-                />
+                <Item>
+                    <Icon name="ios-search" />
+                    <Input
+                        placeholder='Pesquisar'
+                        onFocus={openList}
+                        onChangeText={(text) => searchProduct(text)}
+                    />
                 {focus == true ? (
                     <Icon onPress={onBlur} name="ios-close" />
                 ) : null}
+                </Item>
             </Header>
             {focus == true ? (
                 <SearchedProduct

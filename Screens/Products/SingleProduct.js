@@ -56,8 +56,7 @@ const SingleProduct = (props) => {
                 </Left>
                 <Right>
                     <Button
-                        title="Add"
-                      
+                        title="Adicionar"
                     />
                 </Right>
             </View>

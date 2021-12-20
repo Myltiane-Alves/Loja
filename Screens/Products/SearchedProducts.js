@@ -12,7 +12,7 @@ const SearchedProduct = (props) => {
                 productsFiltered.map((item) => (
                     <ListItem
                         onPress={() => {
-                            props.navigation.navigate("Product Detail", { item: item })
+                            props.navigation.navigate("Detalhe do Produto", { item: item })
                         }}
                         key={item._id}
                         avatar
@@ -35,7 +35,7 @@ const SearchedProduct = (props) => {
             ) : (
                 <View style={styles.center}>
                     <Text style={{ alignSelf: 'center' }}>
-                    Nenhum produto corresponde aos critérios selecionados
+                     Nenhum produto corresponde aos critérios selecionados
                     </Text>
                 </View>
             )}
@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
     center: {
         justifyContent: 'center',
         alignItems: 'center',
-        height: 100
+        height: 100,
+        
     }
 })
 
