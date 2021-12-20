@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import FormContainer from '../../../Shared/Form/FormContainer'
 import Input from '../../../Shared/Form/Input'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import AuthGlobal from "../../../Context/store/AuthGlobal"
+//import AuthGlobal from "../../../Context/store/AuthGlobal"
 
 import { connect } from 'react-redux'
 
