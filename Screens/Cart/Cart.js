@@ -8,8 +8,7 @@ import {
     Right,
     H1
 } from 'react-native'
-import { SwipeListView } from 'react-native-swipe-list-view'
-import CartItem from './CartItem'
+
 
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -24,7 +23,7 @@ const Cart = (props) => {
     props.cartItems.forEach(cart => {
         return (total += cart.product.price)
     });
-    
+
     return (
         <>
             {props.cartItems.length ? (
@@ -62,7 +61,10 @@ const Cart = (props) => {
                         <Text style={styles.price}>R$ {total}</Text>
                     </Left>
                     <Right>
-                        <Button title="Remover" />
+                        <Button 
+                         title="Remover" 
+                         onPress={() => props.clearCart()}
+                        />
                     </Right>
                     <Right>
                         <Button
@@ -90,6 +92,11 @@ const mapStateToProps = (state) => {
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        clearCart: () => dispatch(actions.clearCart)
+    }
+}
 const styles = StyleSheet.create({
     emptyContainer: {
       height: height,
@@ -126,4 +133,4 @@ const styles = StyleSheet.create({
 })
 
   
-export default connect(mapStateToProps, null)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
