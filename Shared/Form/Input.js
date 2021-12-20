@@ -1,28 +1,35 @@
 import React from 'react';
-import { ScrollView, Dimensions, StyleSheet, Text } from 'react-native';
+import { TextInput, StyleSheet } from 'react-native'
 
-var { width } = Dimensions.get('window');
-
-const FormContainer = (props) => {
+const Input = (props) => {
     return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <Text style={styles.title}>{props.title}</Text>
-            {props.children}
-        </ScrollView>
-    )
+        <TextInput
+        style={styles.input}
+        placeholder={props.placeholder}
+        name={props.name}
+        id={props.id}
+        value={props.value}
+        autoCorrect={props.autoCorrect}
+        onChangeText={props.onChangeText}
+        onFocus={props.onFocus}
+        secureTextEntry={props.secureTextEntry}
+        keyboardType={props.keyboardType}
+        >
+        </TextInput>
+    );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        marginTop: 30,
-        marginBottom: 400,
-        width: width,
-        justifyContent: 'center',
-        alignItems: 'center'
+    input: {
+        width: '80%',
+        height: 60,
+        backgroundColor: 'white',
+        margin: 10,
+        borderRadius: 20,
+        padding: 10,
+        borderWidth: 2,
+        borderColor: 'orange'
     },
-    title: {
-        fontSize: 30,
-    }
-})
+});
 
-export default FormContainer;
+export default Input;
