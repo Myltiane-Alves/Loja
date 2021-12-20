@@ -6,15 +6,20 @@ import {
     Text,
     Left,
     Right,
-    H1
-} from 'react-native'
+    H1,
+    ListItem,
+    Thumbnail,
+    Body,
 
+} from 'react-native'
+import { SwipeListView } from 'react-native-swipe-list-view'
+import CartItem from './CartItem';
 
 import Icon from "react-native-vector-icons/FontAwesome";
 
 import { connect } from 'react-redux';
 import * as actions from "../../Redux/Actions/cartActions";
-import { Thumbnail } from 'native-base';
+
 
 var { height, width } = Dimensions.get("window");
 
@@ -29,33 +34,29 @@ const Cart = (props) => {
             {props.cartItems.length ? (
                 <Container>
                   <H1 style={{ alignSelf: 'center'}}>Carrinho</H1>
-                  {props.cartItems.map(data => {
-                      return (
-                        <ListItem
-                          style={styles.listItem}
-                          key={Math.random}
-                          avatar
-                        >
-                           <Left>
-                                <Thumbnail 
-                                    source={{
-                                        uri: data.product.image 
-                                         ? data.product.image 
-                                         : 'https://www.freepngimg.com/thumb/fifa/11-2-fifa-png-images.png'
-                                    }}
-                                />    
-                           </Left> 
-                           <Body style={styles.body}>
-                               <Left>
-                                   <Text>{data.product.name}</Text>
-                               </Left>
-                               <Right>
-                                   <Text>R$ {data.product.price}</Text>
-                               </Right>
-                           </Body>
-                        </ListItem>
-                      );
-                  })}
+                    <SwipeListView
+                      data={props.cartItems}
+                      renderItem={(data) => {
+                        <CartItem item={data} />
+                      }}
+                      renderHiddenItem={(data) => (
+                          <View style={styles.hiddenContainer}>
+                              <TouchableOpacity 
+                                style={styles.hiddenButton}
+                                onPress={() => props.removeFromCart(data.item)}
+                               >
+                                  <Icon name="trash" color={"white"} size={30} />
+                              </TouchableOpacity>
+                          </View>
+                      )}
+                      disableRightSwipe={true}
+                      previewOpenDelay={3000}
+                      friction={1000}
+                      tension={40}
+                      leftOpenValue={75}
+                      stopLeftSwipe={75}
+                      rightOpenValue={-75}
+                    />
                   <View style={styles.bottomContainer}>
                     <Left>
                         <Text style={styles.price}>R$ {total}</Text>
@@ -94,7 +95,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        clearCart: () => dispatch(actions.clearCart)
+        clearCart: () => dispatch(actions.clearCart),
+        removeFromCart: (item) => dispatch(actions.removeFromCart(item)),
     }
 }
 const styles = StyleSheet.create({
