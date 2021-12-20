@@ -22,7 +22,7 @@ const CartItem = (props) => {
           <Text>{data.name}</Text>
         </Left>
         <Right>
-          <Text>$ {data.price}</Text>
+          <Text>R${data.price}</Text>
         </Right>
       </Body>
     </ListItem>

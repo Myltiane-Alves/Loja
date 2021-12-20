@@ -7,13 +7,11 @@ import {
     Left,
     Right,
     H1,
-    ListItem,
-    Thumbnail,
-    Body,
+} from 'native-base'
 
-} from 'react-native'
-import { SwipeListView } from 'react-native-swipe-list-view'
-import CartItem from './CartItem';
+import { SwipeListView } from 'react-native-swipe-list-view';
+
+//import CartItem from './CartItem';
 
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -40,14 +38,14 @@ const Cart = (props) => {
                         <CartItem item={data} />
                       }}
                       renderHiddenItem={(data) => (
-                          <View style={styles.hiddenContainer}>
-                              <TouchableOpacity 
-                                style={styles.hiddenButton}
-                                onPress={() => props.removeFromCart(data.item)}
-                               >
-                                  <Icon name="trash" color={"white"} size={30} />
-                              </TouchableOpacity>
-                          </View>
+                        <View style={styles.hiddenContainer}>
+                          <TouchableOpacity 
+                          style={styles.hiddenButton}
+                          onPress={() => props.removeFromCart(data.item)}
+                          >
+                            <Icon name="trash" color={"white"} size={30} />
+                          </TouchableOpacity>
+                        </View>
                       )}
                       disableRightSwipe={true}
                       previewOpenDelay={3000}
@@ -59,7 +57,7 @@ const Cart = (props) => {
                     />
                   <View style={styles.bottomContainer}>
                     <Left>
-                        <Text style={styles.price}>R$ {total}</Text>
+                        <Text style={styles.price}>R$ {totalPrice}</Text>
                     </Left>
                     <Right>
                         <Button 
@@ -89,16 +87,17 @@ const Cart = (props) => {
 const mapStateToProps = (state) => {
     const { cartItems } = state;
     return {
-        cartItems: cartItems,
-    }
-}
-
+      cartItems: cartItems,
+    };
+};
+  
 const mapDispatchToProps = (dispatch) => {
     return {
-        clearCart: () => dispatch(actions.clearCart),
-        removeFromCart: (item) => dispatch(actions.removeFromCart(item)),
-    }
+      clearCart: () => dispatch(actions.clearCart()),
+      removeFromCart: (item) => dispatch(actions.removeFromCart(item))
+      }
 }
+  
 const styles = StyleSheet.create({
     emptyContainer: {
       height: height,

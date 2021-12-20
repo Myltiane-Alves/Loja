@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+
 import {  LogBox } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
