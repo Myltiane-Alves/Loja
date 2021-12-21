@@ -9,7 +9,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 
 import HomeNavigator from "./HomeNavigator";
 import CartNavigator from "./CartNavigator";
-//import UserNavigator from "./UserNavigator";
+import UserNavigator from "./UserNavigator";
 
 //import AdminNavigator from "./AdminNavigator";
 
@@ -79,7 +79,7 @@ const Main = () => {
       />
       <Tab.Screen
         name="User"
-        component={HomeNavigator}
+        component={UserNavigator}
         options={{
           tabBarIcon: ({ color }) => (
 
