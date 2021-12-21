@@ -47,7 +47,6 @@ const SingleProduct = (props) => {
                     <H1 style={styles.contentHeader}>{item.name}</H1>
                     <Text style={styles.contentText}>{item.brand}</Text>
                 </View>
-
             </ScrollView>
 
             <View style={styles.bottomContainer}>
@@ -57,6 +56,14 @@ const SingleProduct = (props) => {
                 <Right>
                     <Button
                         title="Adicionar"
+                        onPress={() => {props.addItemToCart(item.id),
+                            Toast.show({
+                                topOffset: 60,
+                                type: "success",
+                                text1: `${item.name} added to Cart`,
+                                text2: "Go to your cart to complete order"
+                            })
+                        }}
                     />
                 </Right>
             </View>
