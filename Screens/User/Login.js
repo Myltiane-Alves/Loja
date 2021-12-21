@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import FormContainer from '../../Shared/Form/FormContainer';
 import Input from '../../Shared/Form/Input';
+import Error from '../../Shared/Error';
+
 
 const Login = (props) => {
     const [email, setEmail] = useState("")
@@ -22,7 +24,7 @@ const Login = (props) => {
     };
 
     return (
-        <FormContainer>
+        <FormContainer title={"Login"} >
             <Input
                 placeholder={"Enter Email"}
                 name={"email"}
@@ -39,7 +41,11 @@ const Login = (props) => {
                 onChangeText={(text) => setPassword(text)}
             />
             <View style={styles.buttonGroup}>
-                <Button title="Login"/>
+                {error ? <Error message={error} /> : null}
+                <Button 
+                    title="Login"
+                    onPress={() => handleSubmit()}    
+                />
             </View>
             <View style={[{ marginTop: 40}, styles.buttonGroup]}>
                 <Text style={styles.middleText}>Não tem uma conta ainda ?</Text>
